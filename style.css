@@ -83,3 +83,17 @@ body{
     width: 30px;
     margin-right: 20px;
 }
+
+.weather{
+    display: none;
+}
+
+span{
+    margin-bottom: 30px;
+    display: block;
+}
+
+.error{
+    display: none;
+}
+

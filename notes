@@ -50,60 +50,72 @@
         const weatherText = document.getElementById('weatherText');
 
         async function checkWeather() {
-    const locationInput = document.getElementById("locationInput");
-    const city = locationInput.value;
-    const apiURL = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`;
+            const locationInput = document.getElementById("locationInput");
+            const city = locationInput.value;
+            const apiURL = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`;
+            
 
-    try {
-        const response = await fetch(apiURL);
-        const data = await response.json();
+            try {
+                const response = await fetch(apiURL);
 
-        // Check if the response contains valid weather data
-        if (data.cod === '404') {
-            // Display the "Invalid City Name" text
-            document.querySelector(".error").style.display = "block";
-            // Hide the weather information
-            document.querySelector(".weather").style.display = "none";
-        } else {
-            // Update the weather information
-            document.querySelector(".city").innerHTML = data.name;
-            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + '°C';
-            document.querySelector(".humidity").innerHTML = `${data.main.humidity}%`;
-            document.querySelector(".wind").innerHTML = `${data.wind.speed} km/h`;
+               
 
-            // Set the weather icon and text based on the weather condition
-            if (data.weather[0].main == "Clouds") {
-                weatherIcon.src = "images/clouds.png";
+                const data = await response.json();
+
+                // Update the weather information
+                
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + '°C';
+                document.querySelector(".humidity").innerHTML = `${data.main.humidity}%`;
+                document.querySelector(".wind").innerHTML = `${data.wind.speed} km/h`;
+
+
+                if(data.weather[0].main == "Clouds"){
+                weatherIcon.src = "images/clouds.png"
                 weatherText.textContent = 'Cloudy';
                 weatherText.style.color = 'grey';
-            } else if (data.weather[0].main == "Clear") {
-                weatherIcon.src = "images/clear.png";
+            }
+            
+            else if(data.weather[0].main == "Clear"){
+                weatherIcon.src = "images/clear.png"
                 weatherText.textContent = 'Crystal Clear';
                 weatherText.style.color = 'white';
-            } else if (data.weather[0].main == "Rain") {
-                weatherIcon.src = "images/rain.png";
+            }
+
+            else if(data.weather[0].main == "Rain"){
+                weatherIcon.src = "images/rain.png"
                 weatherText.textContent = 'Rainy';
                 weatherText.style.color = 'lightblue';
-            } else if (data.weather[0].main == "Drizzle") {
-                weatherIcon.src = "images/drizzle.png";
+            }
+
+            else if(data.weather[0].main == "Drizzle"){
+                weatherIcon.src = "images/drizzle.png"
                 weatherText.textContent = 'Light Shower';
                 weatherText.style.color = 'blue';
-            } else if (data.weather[0].main == "Mist") {
-                weatherIcon.src = "images/mist.png";
+            }
+
+            else if(data.weather[0].main == "Mist"){
+                weatherIcon.src = "images/mist.png"
                 weatherText.textContent = 'Foggy';
                 weatherText.style.color = 'yellow-light';
             }
 
-            // Hide the "Invalid City Name" text
-            document.querySelector(".error").style.display = "none";
-            // Display the weather information
-            document.querySelector(".weather").style.display = "block";
-        }
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-}
+            } 
 
+           
+            
+            catch (error) {
+                console.error("An error occurred:", error);
+            }
+
+            document.querySelector(".weather").style.display = "block";
+
+
+           
+
+            
+          
+        }
 
         // Add an event listener to the button
         const searchButton = document.getElementById("searchButton");
